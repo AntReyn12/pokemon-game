@@ -1,7 +1,12 @@
+// Elements grabbed from the DOM //
 const pokemonsEl = document
   .querySelector(".select-screen")
   .querySelectorAll(".character");
 const battleScreenEl = document.querySelector("#battle-screen");
+const player1 = document.querySelector(".player1");
+const player2 = document.querySelector(".player2");
+
+// This is the database //
 const pokemonDB = [
   {
     name: "charmander",
@@ -31,29 +36,64 @@ const pokemonDB = [
     img: "http://www.smogon.com/dex/media/sprites/xy/squirtle.gif",
   },
 ];
-
+// State of the game //
 const gameState = {
   Userpokemon: "",
   rivalPokemon: "",
 };
-
+// Initial loop //
 for (i = 0; i < pokemonsEl.length; i++) {
+  // add function to all characters on screen select //
   pokemonsEl[i].onclick = function () {
+    // current selected pokemon name //
     const pokemonName = this.dataset.pokemon;
+    // elements for images on battle screen //
+    const player1Img = player1.getElementsByTagName("img");
+    const player2Img = player2.getElementsByTagName("img");
+    // save the current pokemon to game state //
     gameState.Userpokemon = pokemonName;
+    // cpu picks pokemon //
     cpuPick();
+    // change select screen to battle screen //
     battleScreenEl.classList.toggle("active");
-    console.log(gameState);
+    // select data from current user pokemon //
+    let currentPokemon = pokemonDB.filter(function (pokemon) {
+      return pokemon.name == gameState.Userpokemon;
+    });
+    player1Img[0].src = currentPokemon[0].img;
+    // select data from current cpu pokemon //
+    let currentRivalPokemon = pokemonDB.filter(function (pokemon) {
+      return pokemon.name == gameState.rivalPokemon;
+    });
+    player2Img[0].src = currentRivalPokemon[0].img;
+
+    // user choose attack //
+
+    // cpu health goes down //
+
+    // cpu attack //
+
+    // user health goes down //
+
+    // rock > scissors //
+
+    // paper > rock //
+
+    // scissors > paper //
+
+    // logic for how attacks impact individual pokemon stats //
+
+    // who ever gets to health <= 0 loses //
   };
 }
 
-function randomNumber(min, max) {
+const randomNumber = function (min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
-}
+};
 
-function cpuPick() {
+const cpuPick = function () {
   gameState.rivalPokemon = pokemonsEl[randomNumber(0, 3)].dataset.pokemon;
-}
+};
 
 // // pokemon
 // // create data for 3 different pokemons, with their names, type, weaknesses, health, and attack moves(name, attack stat, maximum)
