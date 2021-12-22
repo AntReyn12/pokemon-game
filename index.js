@@ -2,6 +2,36 @@ const pokemonsEl = document
   .querySelector(".select-screen")
   .querySelectorAll(".character");
 const battleScreenEl = document.querySelector("#battle-screen");
+const pokemonDB = [
+  {
+    name: "charmander",
+    type: "fire",
+    hp: 39,
+    attack: 52,
+    defense: 43,
+    level: 1,
+    img: "http://www.smogon.com/dex/media/sprites/xy/charmander.gif",
+  },
+  {
+    name: "bulbasaur",
+    type: "grass",
+    hp: 45,
+    attack: 49,
+    defense: 49,
+    level: 1,
+    img: "http://www.smogon.com/dex/media/sprites/xy/bulbasaur.gif",
+  },
+  {
+    name: "squirtle",
+    type: "water",
+    hp: 44,
+    attack: 48,
+    defense: 65,
+    level: 1,
+    img: "http://www.smogon.com/dex/media/sprites/xy/squirtle.gif",
+  },
+];
+
 const gameState = {
   Userpokemon: "",
   rivalPokemon: "",
