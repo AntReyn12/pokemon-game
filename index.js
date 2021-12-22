@@ -1,17 +1,28 @@
-const gameState = {
-  pokemon: "",
-};
-
 const pokemonsEl = document
   .querySelector(".select-screen")
   .querySelectorAll(".character");
+const battleScreenEl = document.querySelector("#battle-screen");
+const gameState = {
+  Userpokemon: "",
+  rivalPokemon: "",
+};
 
 for (i = 0; i < pokemonsEl.length; i++) {
   pokemonsEl[i].onclick = function () {
     const pokemonName = this.dataset.pokemon;
-    gameState.pokemon = pokemonName;
+    gameState.Userpokemon = pokemonName;
+    cpuPick();
+    battleScreenEl.classList.toggle("active");
     console.log(gameState);
   };
+}
+
+function randomNumber(min, max) {
+  return Math.floor(Math.random() * (max - min)) + min;
+}
+
+function cpuPick() {
+  gameState.rivalPokemon = pokemonsEl[randomNumber(0, 3)].dataset.pokemon;
 }
 
 // // pokemon
