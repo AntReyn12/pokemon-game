@@ -60,16 +60,20 @@ for (i = 0; i < pokemonsEl.length; i++) {
     // change select screen to battle screen //
     battleScreenEl.classList.toggle("active");
     // select data from current user pokemon //
-    let currentPokemon = pokemonDB.filter(function (pokemon) {
+    gameState.currentPokemon = pokemonDB.filter(function (pokemon) {
       return pokemon.name == gameState.Userpokemon;
     });
-    player1Img[0].src = currentPokemon[0].img;
+    player1Img[0].src = gameState.currentPokemon[0].img;
     // select data from current cpu pokemon //
-    let currentRivalPokemon = pokemonDB.filter(function (pokemon) {
+    gameState.currentRivalPokemon = pokemonDB.filter(function (pokemon) {
       return pokemon.name == gameState.rivalPokemon;
     });
-    player2Img[0].src = currentRivalPokemon[0].img;
+    player2Img[0].src = gameState.currentRivalPokemon[0].img;
 
+    gameState.currentPokemon[0].health = calculateInitialHealth(
+      gameState.currentPokemon
+    );
+    console.log(gameState);
     // user choose attack //
 
     // cpu health goes down //
@@ -101,6 +105,10 @@ for (i = 0; i < attackBtnsEl.length; i++) {
 const cpuAttack = function () {
   const attacks = ["rock", "paper", "scissors"];
   return attacks[randomNumber(0, 3)];
+};
+
+const calculateInitialHealth = function (user) {
+  return 0.2 * (Math.sqrt(user[0].level) * user[0].defense) * user[0].hp;
 };
 
 const play = function (userAttack, cpuAttack) {
