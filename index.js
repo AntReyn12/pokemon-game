@@ -5,6 +5,7 @@ const pokemonsEl = document
 const battleScreenEl = document.querySelector("#battle-screen");
 const player1 = document.querySelector(".player1");
 const player2 = document.querySelector(".player2");
+const attackBtnsEl = battleScreenEl.querySelectorAll(".attack");
 
 // This is the database //
 const pokemonDB = [
@@ -40,7 +41,9 @@ const pokemonDB = [
 const gameState = {
   Userpokemon: "",
   rivalPokemon: "",
+  currentUserAttack: "",
 };
+
 // Initial loop //
 for (i = 0; i < pokemonsEl.length; i++) {
   // add function to all characters on screen select //
@@ -86,6 +89,51 @@ for (i = 0; i < pokemonsEl.length; i++) {
     // who ever gets to health <= 0 loses //
   };
 }
+
+for (i = 0; i < attackBtnsEl.length; i++) {
+  attackBtnsEl[i].onclick = function () {
+    const attackName = this.dataset.attack;
+    gameState.currentUserAttack = attackName;
+    play(attackName, cpuAttack());
+  };
+}
+
+const cpuAttack = function () {
+  const attacks = ["rock", "paper", "scissors"];
+  return attacks[randomNumber(0, 3)];
+};
+
+const play = function (userAttack, cpuAttack) {
+  switch (userAttack) {
+    case "rock":
+      if (cpuAttack == "paper") {
+        console.log("rock loses to paper");
+      } else if (cpuAttack == "scissors") {
+        console.log("rock beats scissors");
+      } else {
+        console.log("It's a draw");
+      }
+      break;
+    case "paper":
+      if (cpuAttack == "rock") {
+        console.log("paper beats rock");
+      } else if (cpuAttack == "scissors") {
+        console.log("paper loses to scissors");
+      } else {
+        console.log("It's a draw");
+      }
+      break;
+    case "scissors":
+      if (cpuAttack == "paper") {
+        console.log("scissors beats paper");
+      } else if (cpuAttack == "rock") {
+        console.log("scissors loses to rock");
+      } else {
+        console.log("It's a draw");
+      }
+      break;
+  }
+};
 
 const randomNumber = function (min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
