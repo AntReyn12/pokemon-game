@@ -7,41 +7,40 @@ const player1 = document.querySelector(".player1");
 const player2 = document.querySelector(".player2");
 const attackBtnsEl = battleScreenEl.querySelectorAll(".attack");
 
-// This is the database //
-const pokemonDB = [
-  {
-    name: "charmander",
-    type: "fire",
-    hp: 39,
-    attack: 52,
-    defense: 43,
-    level: 1,
-    img: "http://www.smogon.com/dex/media/sprites/xy/charmander.gif",
-  },
-  {
-    name: "bulbasaur",
-    type: "grass",
-    hp: 45,
-    attack: 49,
-    defense: 49,
-    level: 1,
-    img: "http://www.smogon.com/dex/media/sprites/xy/bulbasaur.gif",
-  },
-  {
-    name: "squirtle",
-    type: "water",
-    hp: 44,
-    attack: 48,
-    defense: 65,
-    level: 1,
-    img: "http://www.smogon.com/dex/media/sprites/xy/squirtle.gif",
-  },
-];
 // State of the game //
 const gameState = {
   Userpokemon: "",
   rivalPokemon: "",
   currentUserAttack: "",
+  pokemonDB: [
+    {
+      name: "charmander",
+      type: "fire",
+      hp: 39,
+      attack: 52,
+      defense: 43,
+      level: 1,
+      img: "http://www.smogon.com/dex/media/sprites/xy/charmander.gif",
+    },
+    {
+      name: "bulbasaur",
+      type: "grass",
+      hp: 45,
+      attack: 49,
+      defense: 49,
+      level: 1,
+      img: "http://www.smogon.com/dex/media/sprites/xy/bulbasaur.gif",
+    },
+    {
+      name: "squirtle",
+      type: "water",
+      hp: 44,
+      attack: 48,
+      defense: 65,
+      level: 1,
+      img: "http://www.smogon.com/dex/media/sprites/xy/squirtle.gif",
+    },
+  ],
 };
 
 // Initial loop //
@@ -60,12 +59,14 @@ for (i = 0; i < pokemonsEl.length; i++) {
     // change select screen to battle screen //
     battleScreenEl.classList.toggle("active");
     // select data from current user pokemon //
-    gameState.currentPokemon = pokemonDB.filter(function (pokemon) {
+    gameState.currentPokemon = gameState.pokemonDB.filter(function (pokemon) {
       return pokemon.name == gameState.Userpokemon;
     });
     player1Img[0].src = gameState.currentPokemon[0].img;
     // select data from current cpu pokemon //
-    gameState.currentRivalPokemon = pokemonDB.filter(function (pokemon) {
+    gameState.currentRivalPokemon = gameState.pokemonDB.filter(function (
+      pokemon
+    ) {
       return pokemon.name == gameState.rivalPokemon;
     });
     player2Img[0].src = gameState.currentRivalPokemon[0].img;
@@ -73,27 +74,17 @@ for (i = 0; i < pokemonsEl.length; i++) {
     gameState.currentPokemon[0].health = calculateInitialHealth(
       gameState.currentPokemon
     );
+    gameState.currentPokemon[0].originalHealth = calculateInitialHealth(
+      gameState.currentPokemon
+    );
+
     gameState.currentRivalPokemon[0].health = calculateInitialHealth(
       gameState.currentRivalPokemon
     );
+    gameState.currentRivalPokemon[0].originalHealth = calculateInitialHealth(
+      gameState.currentRivalPokemon
+    );
     console.log(gameState);
-    // user choose attack //
-
-    // cpu health goes down //
-
-    // cpu attack //
-
-    // user health goes down //
-
-    // rock > scissors //
-
-    // paper > rock //
-
-    // scissors > paper //
-
-    // logic for how attacks impact individual pokemon stats //
-
-    // who ever gets to health <= 0 loses //
   };
 }
 
@@ -118,6 +109,23 @@ const attackMove = function (attack, level, stack, critical, enemy, attacker) {
   console.log(enemy.name + " before: " + enemy.health);
   const attackAmount = attack * level * (stack + critical);
   enemy.health = enemy.health - attackAmount;
+  const userHP = player1
+    .querySelector(".stats")
+    .querySelector(".health")
+    .querySelector(".health-bar")
+    .querySelector(".inside");
+  const cpuHP = player2
+    .querySelector(".stats")
+    .querySelector(".health")
+    .querySelector(".health-bar")
+    .querySelector(".inside");
+  if (enemy.owner == "user") {
+    const minusPercent = (enemy.health * 100) / enemy.originalHealth;
+    userHP.style.width = (minusPercent < 0 ? 0 : minusPercent) + "%";
+  } else {
+    const minusPercent = (enemy.health * 100) / enemy.originalHealth;
+    cpuHP.style.width = (minusPercent < 0 ? 0 : minusPercent) + "%";
+  }
   checkWinner(enemy, attacker);
   console.log(enemy.name + " after: " + enemy.health);
 };
@@ -131,6 +139,8 @@ const checkWinner = function (enemy, attacker) {
 const play = function (userAttack, cpuAttack) {
   const currentPokemon = gameState.currentPokemon[0];
   const currentRivalPokemon = gameState.currentRivalPokemon[0];
+  currentPokemon.owner = "user";
+  currentRivalPokemon.owner = "cpu";
   switch (userAttack) {
     case "rock":
       if (cpuAttack == "paper") {
@@ -358,39 +368,3 @@ const randomNumber = function (min, max) {
 const cpuPick = function () {
   gameState.rivalPokemon = pokemonsEl[randomNumber(0, 3)].dataset.pokemon;
 };
-
-// // pokemon
-// // create data for 3 different pokemons, with their names, type, weaknesses, health, and attack moves(name, attack stat, maximum)
-// const pokemons = [
-//   {
-//     name: "charmander",
-//     type: "fire",
-//     attack: 52,
-//     stamina: 39,
-//     level: 1,
-//   },
-//   {
-//     name: "charmander",
-//     type: "fire",
-//     attack: 52,
-//     stamina: 39,
-//     level: 1,
-//   },
-// ];
-
-// var attack = 20;
-// var level = 10;
-// var stack = 1.3;
-// var stamina = 39;
-
-// // create a formula for attacks
-// console.log((attack * level * stack) / 7);
-
-// // create a formula for health
-// //HP = 0.20 x Sqrt(Pokemon_level) x (HP_base_stat)
-// console.log(0.2 * Math.sqrt(level) * stamina * 15);
-
-// // let user choose 1 and then assign a random pokemon to battle thats not the users pokemon
-// // p1 vs p2
-
-// // when one user loses all his health declare a winner
