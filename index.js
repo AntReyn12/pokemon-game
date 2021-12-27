@@ -9,7 +9,7 @@ const attackBtnsEl = battleScreenEl.querySelectorAll(".attack");
 
 // State of the game //
 const gameState = {
-  Userpokemon: "",
+  userPokemon: "",
   rivalPokemon: "",
   currentUserAttack: "",
   pokemonDB: [
@@ -53,14 +53,14 @@ for (i = 0; i < pokemonsEl.length; i++) {
     const player1Img = player1.getElementsByTagName("img");
     const player2Img = player2.getElementsByTagName("img");
     // save the current pokemon to game state //
-    gameState.Userpokemon = pokemonName;
+    gameState.userPokemon = pokemonName;
     // cpu picks pokemon //
     cpuPick();
     // change select screen to battle screen //
     battleScreenEl.classList.toggle("active");
     // select data from current user pokemon //
     gameState.currentPokemon = gameState.pokemonDB.filter(function (pokemon) {
-      return pokemon.name == gameState.Userpokemon;
+      return pokemon.name == gameState.userPokemon;
     });
     player1Img[0].src = gameState.currentPokemon[0].img;
     // select data from current cpu pokemon //
@@ -95,6 +95,18 @@ for (i = 0; i < attackBtnsEl.length; i++) {
     play(attackName, cpuAttack());
   };
 }
+
+const randomNumber = function (min, max) {
+  return Math.floor(Math.random() * (max - min)) + min;
+};
+
+const cpuPick = function () {
+  do {
+    gameState.rivalPokemon = pokemonsEl[randomNumber(0, 3)].dataset.pokemon;
+    console.log("Looping " + gameState.rivalPokemon);
+  } while (gameState.userPokemon == gameState.rivalPokemon);
+  console.log(gameState.userPokemon);
+};
 
 const cpuAttack = function () {
   const attacks = ["rock", "paper", "scissors"];
@@ -359,12 +371,4 @@ const play = function (userAttack, cpuAttack) {
       }
       break;
   }
-};
-
-const randomNumber = function (min, max) {
-  return Math.floor(Math.random() * (max - min)) + min;
-};
-
-const cpuPick = function () {
-  gameState.rivalPokemon = pokemonsEl[randomNumber(0, 3)].dataset.pokemon;
 };

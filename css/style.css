@@ -160,6 +160,7 @@ body {
   text-transform: capitalize;
   font-size: 200px;
   text-align: center;
+  color: yellow;
 }
 #battle-screen .battle-btns {
   text-align: center;
@@ -240,8 +241,8 @@ body {
 /* PLAYERS ============================================================*/
 #battle-screen .player {
   position: absolute;
-  bottom: 10%;
-  left: 20%;
+  bottom: 70px;
+  left: 200px;
 }
 
 #battle-screen .player img {
@@ -313,8 +314,8 @@ body {
 /* CPU ============================================================*/
 #battle-screen .cpu {
   position: absolute;
-  bottom: 10%;
-  right: 20%;
+  bottom: 70px;
+  right: 200px;
 }
 
 #battle-screen .cpu .player2 {
