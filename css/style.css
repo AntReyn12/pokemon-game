@@ -181,7 +181,7 @@ body {
   margin-top: 100px;
   position: absolute;
   top: 85px;
-  left: 450px;
+  left: 485px;
 }
 
 #battle-screen .battle-btns .rock {
@@ -245,7 +245,7 @@ body {
 #battle-screen .player {
   position: absolute;
   bottom: 0px;
-  left: 100px;
+  left: 150px;
 }
 
 #battle-screen .player img {
@@ -318,7 +318,7 @@ body {
 #battle-screen .cpu {
   position: absolute;
   bottom: 0px;
-  right: 50px;
+  right: 0px;
 }
 
 #battle-screen .cpu .player2 {
@@ -383,4 +383,110 @@ body {
 /* MEDIA QUERIES */
 /* TABLET */
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-} ;
+  #battle-screen .player {
+    bottom: 0px;
+    left: 50px;
+  }
+  #battle-screen .cpu {
+    bottom: 0px;
+    right: -50px;
+  }
+  #battle-screen .battle-btns {
+    top: 200px;
+    left: 150px;
+  }
+}
+@media only screen and (max-device-width: 420px) {
+  .header .mode {
+    display: none;
+  }
+  .header .title {
+    font-size: 26px;
+  }
+  .select-screen .main .character {
+    width: 80px;
+    font-size: 6px;
+  }
+  #battle-screen .fight-btn {
+    font-size: 80px;
+    margin-bottom: 600px;
+  }
+  #battle-screen .battle-btns {
+    top: 35px;
+    left: -5px;
+  }
+  #battle-screen .battle-btns .rock {
+    font-size: 10px;
+    height: 80px;
+    width: 80px;
+    padding-top: 30px;
+  }
+  #battle-screen .battle-btns .paper {
+    font-size: 10px;
+    height: 80px;
+    width: 80px;
+    padding-top: 30px;
+  }
+  #battle-screen .battle-btns .scissors {
+    font-size: 9px;
+    height: 80px;
+    width: 80px;
+    padding-top: 30px;
+  }
+  #battle-screen .player {
+    bottom: 0px;
+    left: -30px;
+  }
+  #battle-screen .cpu {
+    bottom: 0px;
+    right: -50px;
+  }
+  #battle-screen .player img {
+    height: 150px;
+  }
+  #battle-screen .cpu img {
+    height: 150px;
+  }
+  #battle-screen .cpu .player2 .stats {
+    right: 10px;
+    height: 75px;
+    width: 150px;
+  }
+  #battle-screen .player .player1 .stats {
+    height: 75px;
+    width: 150px;
+    left: 0px;
+  }
+  #battle-screen .player .player1 .stats .name {
+    font-size: 12px;
+  }
+  #battle-screen .cpu .player2 .stats .name {
+    font-size: 12px;
+  }
+  #battle-screen .player .player1 .stats .health {
+    padding-right: 5px;
+    font-size: 10px;
+  }
+  #battle-screen .cpu .player2 .stats .health {
+    font-size: 10px;
+  }
+  #battle-screen .player .player1 .stats .health .title {
+    padding-right: 8px;
+    padding-top: 3px;
+  }
+  #battle-screen .cpu .player2 .stats .health .title {
+    padding-top: 3px;
+  }
+  #battle-screen .player .player1 .stats .health .health-bar .inside {
+    height: 14px;
+  }
+  #battle-screen .player .player1 .stats .health .health-bar {
+    height: 14px;
+  }
+  #battle-screen .cpu .player2 .stats .health .health-bar .inside {
+    height: 14px;
+  }
+  #battle-screen .cpu .player2 .stats .health .health-bar {
+    height: 14px;
+  }
+}
