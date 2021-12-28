@@ -162,7 +162,6 @@ body {
   justify-content: center;
   width: 100%;
   flex-direction: column;
-  margin-bottom: 300px;
   position: relative;
 }
 
@@ -173,7 +172,7 @@ body {
   text-align: center;
   color: aliceblue;
   width: 100%;
-  margin-bottom: 150px;
+  margin-bottom: 450px;
 }
 #battle-screen .battle-btns {
   text-align: center;
@@ -181,7 +180,8 @@ body {
   justify-content: center;
   margin-top: 100px;
   position: absolute;
-  top: 105px;
+  top: 85px;
+  left: 450px;
 }
 
 #battle-screen .battle-btns .rock {
@@ -202,11 +202,7 @@ body {
   margin: 0 10px;
   cursor: pointer;
 }
-#battle-screen .battle-btns .rock img {
-  width: 75px;
-  height: 56px;
-  margin-bottom: 5px;
-}
+
 #battle-screen .battle-btns .paper {
   font-family: "Press Start 2P", cursive;
   font-size: 14px;
@@ -225,11 +221,7 @@ body {
   margin: 0 10px;
   cursor: pointer;
 }
-#battle-screen .battle-btns .paper img {
-  width: 75px;
-  height: 56px;
-  margin-bottom: 5px;
-}
+
 #battle-screen .battle-btns .scissors {
   font-family: "Press Start 2P", cursive;
   font-size: 12px;
@@ -248,17 +240,12 @@ body {
   margin: 0 10px;
   cursor: pointer;
 }
-#battle-screen .battle-btns .scissors img {
-  width: 75px;
-  height: 56px;
-  margin-bottom: 5px;
-}
 
 /* PLAYERS ============================================================*/
 #battle-screen .player {
   position: absolute;
-  bottom: 70px;
-  left: 200px;
+  bottom: 0px;
+  left: 100px;
 }
 
 #battle-screen .player img {
@@ -275,15 +262,15 @@ body {
   position: relative;
 }
 #battle-screen .player .player1 .stats {
-  position: absolute;
+  position: relative;
   background: #f8f8d8;
-  top: -140px;
-  left: -70px;
   height: 100px;
+  left: -50px;
   width: 300px;
   border-radius: 5px;
   border: 5px solid #506858;
   padding: 15px;
+  margin-bottom: 20px;
 }
 #battle-screen .player .player1 .stats .name {
   font-family: "Press Start 2P", cursive;
@@ -330,23 +317,23 @@ body {
 /* CPU ============================================================*/
 #battle-screen .cpu {
   position: absolute;
-  bottom: 70px;
-  right: 200px;
+  bottom: 0px;
+  right: 50px;
 }
 
 #battle-screen .cpu .player2 {
   position: relative;
 }
 #battle-screen .cpu .player2 .stats {
-  position: absolute;
+  position: relative;
   background: #f8f8d8;
-  top: -140px;
-  left: -70px;
+  right: 50px;
   height: 100px;
   width: 300px;
   border-radius: 5px;
   border: 5px solid #506858;
   padding: 15px;
+  margin-bottom: 20px;
 }
 #battle-screen .cpu .player2 .stats .name {
   font-family: "Press Start 2P", cursive;
@@ -393,3 +380,7 @@ body {
 #battle-screen .cpu img {
   height: 200px;
 }
+/* MEDIA QUERIES */
+/* TABLET */
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+} ;
