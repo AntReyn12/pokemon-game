@@ -6,6 +6,9 @@ const battleScreenEl = document.querySelector("#battle-screen");
 const player1 = document.querySelector(".player1");
 const player2 = document.querySelector(".player2");
 const attackBtnsEl = battleScreenEl.querySelectorAll(".attack");
+const playerPokemonName = player1.querySelector(".name");
+const cpuPokemonName = player2.querySelector(".name");
+const fightBtn = document.querySelector(".fight-btn");
 
 // State of the game //
 const gameState = {
@@ -14,7 +17,7 @@ const gameState = {
   currentUserAttack: "",
   pokemonDB: [
     {
-      name: "charmander",
+      name: "Charmander",
       type: "fire",
       hp: 39,
       attack: 52,
@@ -23,7 +26,7 @@ const gameState = {
       img: "http://www.smogon.com/dex/media/sprites/xy/charmander.gif",
     },
     {
-      name: "bulbasaur",
+      name: "Bulbasaur",
       type: "grass",
       hp: 45,
       attack: 49,
@@ -32,7 +35,7 @@ const gameState = {
       img: "http://www.smogon.com/dex/media/sprites/xy/bulbasaur.gif",
     },
     {
-      name: "squirtle",
+      name: "Squirtle",
       type: "water",
       hp: 44,
       attack: 48,
@@ -71,6 +74,9 @@ for (i = 0; i < pokemonsEl.length; i++) {
     });
     player2Img[0].src = gameState.currentRivalPokemon[0].img;
 
+    playerPokemonName.textContent = pokemonName;
+    console.log(playerPokemonName);
+
     gameState.currentPokemon[0].health = calculateInitialHealth(
       gameState.currentPokemon
     );
@@ -103,9 +109,8 @@ const randomNumber = function (min, max) {
 const cpuPick = function () {
   do {
     gameState.rivalPokemon = pokemonsEl[randomNumber(0, 3)].dataset.pokemon;
-    console.log("Looping " + gameState.rivalPokemon);
   } while (gameState.userPokemon == gameState.rivalPokemon);
-  console.log(gameState.userPokemon);
+  cpuPokemonName.textContent = gameState.rivalPokemon;
 };
 
 const cpuAttack = function () {
@@ -144,7 +149,8 @@ const attackMove = function (attack, level, stack, critical, enemy, attacker) {
 
 const checkWinner = function (enemy, attacker) {
   if (enemy.health <= 0) {
-    console.log("YOU WIN " + attacker.name);
+    fightBtn.textContent = `You win ${attacker.name}!`;
+    fightBtn.style.fontSize = "80px";
   }
 };
 
